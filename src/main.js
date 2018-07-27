@@ -5,6 +5,8 @@ import { BrowserWindow, Menu, app } from 'electron';
 import path from 'path';
 import url from 'url';
 
+import { requireTaskPool } from 'electron-remote';
+const scrobble = requireTaskPool(require.resolve('./scrobble'));
 
 /**
 * Enable Widevine Content Decryption Module
@@ -16,8 +18,7 @@ app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903');
 /**
 * Define global variable for the main window
 */
-let mainWindow;
-
+global.mainWindow = null;
 
 /**
 * Create app menu template
@@ -168,6 +169,12 @@ const activateApp = () => {
   Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 };
 
+const runXpath = (xpath, success) => {
+  mainWindow.webContents.executeJavaScript("document.querySelector('" + xpath + "').value",
+  result => {
+    success(result);
+  });
+}
 
 /**
 * Create new frameless window
@@ -191,9 +198,20 @@ const createFramelessWindow = () => {
         -webkit-app-region: no-drag;
       }
     `);
+    
+    mainWindow.webContents.executeJavaScript(`document.getElementsByClassName('profile-icon')[0].src`, function (result) {
+      console.log('RESULT...\n');
+      console.log(result);
+    });
+
+    /*
+    scrobble().then(result => {
+      console.log('work done');
+      console.log(result);
+    });
+    */
   });
 };
-
 
 /**
 * Activate app when ready
