@@ -190,6 +190,11 @@ const createFramelessWindow = () => {
       body {
         -webkit-user-select: none;
         -webkit-app-region: no-drag;
+        padding-right: 17px;
+        box-sizing: content-box;
+      }
+      body::-webkit-scrollbar {
+        width: 1em;
       }
       a {
         -webkit-app-region: no-drag;
