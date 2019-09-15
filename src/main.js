@@ -31,47 +31,47 @@ const menuTemplate = [{
     type: 'separator',
   }, {
     label: 'Hide Netflix',
-    accelerator: 'Command+H',
+    accelerator: 'CommandOrControl+H',
     role: 'hide',
   }, {
     label: 'Quit Netflix',
-    accelerator: 'Command+Q',
+    accelerator: 'CommandOrControl+Q',
     role: 'quit',
   }],
 }, {
   label: 'Edit',
   submenu: [{
     label: 'Undo',
-    accelerator: 'Command+Z',
+    accelerator: 'CommandOrControl+Z',
     role: 'undo',
   }, {
     label: 'Redo',
-    accelerator: 'Command+Y',
+    accelerator: 'CommandOrControl+Y',
     role: 'redo',
   }, {
     type: 'separator',
   }, {
     label: 'Cut',
-    accelerator: 'Command+X',
+    accelerator: 'CommandOrControl+X',
     role: 'cut',
   }, {
     label: 'Copy',
-    accelerator: 'Command+C',
+    accelerator: 'CommandOrControl+C',
     role: 'copy',
   }, {
     label: 'Paste',
-    accelerator: 'Command+V',
+    accelerator: 'CommandOrControl+V',
     role: 'paste',
   }, {
     label: 'Select All',
-    accelerator: 'Command+A',
+    accelerator: 'CommandOrControl+A',
     role: 'selectall',
   }],
 }, {
   label: 'View',
   submenu: [{
     label: 'Reload',
-    accelerator: 'Command+R',
+    accelerator: 'CommandOrControl+R',
     click: (menuItem, mainWindow) => {
       if (mainWindow) {
         mainWindow.reload();
@@ -81,17 +81,21 @@ const menuTemplate = [{
 }, {
   label: 'Window',
   submenu: [{
+    label: 'Fullscreen',
+    accelerator: 'CommandOrControl+F',
+    role: 'togglefullscreen'
+  },{
     label: 'Zoom',
     role: 'zoom',
   }, {
     label: 'Minimize',
-    accelerator: 'Command+M',
+    accelerator: 'CommandOrControl+M',
     role: 'minimize',
   }, {
     type: 'separator',
   }, {
     label: 'Toggle Frameless Window',
-    accelerator: 'Command+E',
+    accelerator: 'CommandOrControl+E',
     type: 'checkbox',
     checked: false,
     click: (menuItem, mainWindow) => {
@@ -105,7 +109,7 @@ const menuTemplate = [{
     },
   }, {
     label: 'Float on Top',
-    accelerator: 'Command+T',
+    accelerator: 'CommandOrControl+T',
     type: 'checkbox',
     checked: false,
     click: (menuItem, mainWindow) => {
@@ -117,7 +121,7 @@ const menuTemplate = [{
     type: 'separator',
   }, {
     label: 'Show Inspector',
-    accelerator: 'Command+Alt+I',
+    accelerator: 'CommandOrControl+Alt+I',
     click: (menuItem, mainWindow) => {
       mainWindow.webContents.openDevTools();
     },
@@ -185,10 +189,13 @@ const createFramelessWindow = () => {
       html,
       body {
         -webkit-user-select: none;
-        -webkit-app-region: drag;
+        -webkit-app-region: no-drag;
       }
       a {
         -webkit-app-region: no-drag;
+      }
+      .logo {
+        -webkit-app-region: drag;
       }
     `);
   });
