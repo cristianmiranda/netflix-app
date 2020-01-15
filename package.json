@@ -4,10 +4,10 @@
   "private": true,
   "main": "bootstrap.js",
   "scripts": {
-    "start": "$(npm bin)/electron .",
-    "package-macos": "$(npm bin)/electron-packager . Netflix --platform=darwin --arch=x64 --icon=./src/public/netflix.icns --app-version=0.1.0 --app-bundle-id=no.cristianmiranda.netflix --helper-bundle-id=no.cristianmiranda.netflix.helper --out ./dist --overwrite",
-    "package-windows": "$(npm bin)/electron-packager . Netflix --out ./dist --overwrite --platform=win32 --arch=ia32 --app-version=0.1.0 --icon=./src/public/netflix.ico --prune=true",
-    "package-linux": "$(npm bin)/electron-packager . Netflix --out ./dist --overwrite --platform=linux --arch=x64 --icon=./src/public/netflix.png --prune=true --app-version=0.1.0"
+    "start": "electron .",
+    "package-macos": "electron-packager . Netflix --platform=darwin --arch=x64 --icon=./src/public/netflix.icns --app-version=0.1.0 --app-bundle-id=no.cristianmiranda.netflix --helper-bundle-id=no.cristianmiranda.netflix.helper --out ./dist --overwrite",
+    "package-windows": "electron-packager . Netflix --out ./dist --overwrite --platform=win32 --arch=ia32 --app-version=0.1.0 --icon=./src/public/netflix.ico --prune=true",
+    "package-linux": "electron-packager . Netflix --out ./dist --overwrite --platform=linux --arch=x64 --icon=./src/public/netflix.png --prune=true --app-version=0.1.0"
   },
   "engines": {
     "node": ">=8.9.3"
